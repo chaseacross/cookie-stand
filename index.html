@@ -11,17 +11,29 @@
           <li><a href='index.html'>Home</a></li>
         </ul>
     </header>
+<!-- Table on Index page rendering -->
     <div id="salesEstimates"></div>
        <script type='text/javascript'>
        var ul=document.createElement('ul');
        for(i=0;i<8;i++)
        {
            var li=document.createElement('li');
-           li.innerHTML="Sometext";
+           li.innerHTML="Data";
            ul.appendChild(li);
        }
        document.getElementById('salesEstimates').appendChild(ul);
-
+//Below is the starter code//
+var pikePlace = {
+  min: 17,
+  max: 88,
+  avg: 5.2,
+  getRandom = function(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min +1)) + min;
+  }
+  getRandom()
+};
        </script>
 <!-- Will move Javascript to seperate file when first shop is working -->
   <!-- <script src='app.js'></script> -->
