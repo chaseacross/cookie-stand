@@ -28,17 +28,12 @@ pikePlace.cookiesPerCusty = function() {
   console.log('Cookies per hour fired!');
 }
 //Showing results in table on Index//
-var div = document.getElementById('placeholder');
-
-var fruits = ['Apples','Bananas','Pineapples','Peaches','Grapes'],
+var div = document.getElementById('pikePlace');
     ul = document.createElement('ul');
-
-for(var i in fruits) {
+for(var i in pikePlace.cookiesPerHour) {
 	var li = document.createElement('li'),
-		  content = document.createTextNode(fruits[i]);
-
+		  content = document.createTextNode(pikePlace.cookiesPerHour[i]);
   li.appendChild(content);
   ul.appendChild(li);
 }
-
 div.appendChild(ul);
