@@ -11,7 +11,7 @@ var pikePlace = {
 };
 //Figuring out Customers Per Hour -- will multiply by average order to find cookies per hour//
 pikePlace.custiesPerHour = function() {
-  for ( var i = 0; i < hours.length; i++) {
+  for (var i = 0; i < hours.length; i++) {
   var hourlyCusty = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
     this.avgCookiesPerCusty.push(hourlyCusty);
   }
@@ -28,10 +28,17 @@ pikePlace.cookiesPerCusty = function() {
   console.log('Cookies per hour fired!');
 }
 //Showing results in table on Index//
-var ul = document.getElementById('pikePlace');
-ul.textContent = pikePlace.name;
-for (var i = 0; i < hours.length; i++) {
-  var li = document.createElement('li');
-  li.textContent = hours[i] + ' ' + this.cookiesPerHour[i];
+var div = document.getElementById('placeholder');
+
+var fruits = ['Apples','Bananas','Pineapples','Peaches','Grapes'],
+    ul = document.createElement('ul');
+
+for(var i in fruits) {
+	var li = document.createElement('li'),
+		  content = document.createTextNode(fruits[i]);
+
+  li.appendChild(content);
   ul.appendChild(li);
 }
+
+div.appendChild(ul);
