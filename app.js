@@ -1,39 +1,32 @@
 var hours = ['10am: ', '11am: ', '12pm: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: '];
 
-var pikePlace = {
-  name: 'Pike Place',
-  min: 17,
-  max: 88,
-  avg: 5.2,
-  avgCookiesPerCusty: [],
-  cookiesPerHour: [],
-  totalCookies: 0,
+//Deleted existing code -- will be using constructor to generate stores -- using 2-9-2017 pull as reference//
+
+//Recreated all elements from one store per example from lecture//
+function CookieStore(name, min, max, avgCookiesPerSale){
+  this.name = name;
+  this.min = min;
+  this.max = max;
+  this.avg = avg;
+  this.total = 0;
+  this.avgCookiesPerSale = [];
+  this.cookiesPerHour = [];
 };
-//Figuring out Customers Per Hour -- will multiply by average order to find cookies per hour//
-pikePlace.custiesPerHour = function() {
-  for (var i = 0; i < hours.length; i++) {
-  var hourlyCusty = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
-    this.avgCookiesPerCusty.push(hourlyCusty);
+
+//Creating first element -- grabbing straight from one store//
+CookieStore.custiesPerHour = function() {
+  for ( var i = 0; i < hours.length; i++) {
+    var hourlyCusty = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+    this.avgCookiesPerSale.push(hourlyCusty);
   }
-  console.log('Custies Per Hour fired!');
 };
-//Multiply custies per hour by average cookies per hour//
-pikePlace.cookiesPerCusty = function() {
+
+//Creating per store cookie totals//
+CookieStore.cookiesPerCustomer = function() {
   this.custiesPerHour();
   for (var i = 0; i < hours.length; i++) {
-    var hourCookies = Math.ceil(this.avgCookiesPerCusty[i] * this.avg);
-    this.cookiesPerHour.push(hourCookies);
-    this.totalCookies += hourCookies;
+    var singleHourCookies = Math.ceil(this.avgCookiesPerSale[i] * this.avg);
+    this.cookiesPerHour.push(singleHourCookies);
+    this.total += singleHourCookies;
   }
-  console.log('Cookies per hour fired!');
-}
-//Showing results in table on Index//
-var div = document.getElementById('pikePlace');
-    ul = document.createElement('ul');
-for(var i in pikePlace.cookiesPerHour) {
-	var li = document.createElement('li'),
-		  content = document.createTextNode(pikePlace.cookiesPerHour[i]);
-  li.appendChild(content);
-  ul.appendChild(li);
-}
-div.appendChild(ul);
+};
