@@ -30,3 +30,19 @@ CookieStore.cookiesPerCustomer = function() {
     this.total += singleHourCookies;
   }
 };
+
+//Generating table and populating with data//
+this.renderAsRow = function(){
+  var peopleTable = document.getElementByID('peopleTable');
+  var trElement = document.createElement('tr');
+  var nameData = document.createElement('td');
+  var jobData = document.createElement('td');
+  var ageData = document.createElement('td');
+  nameData.textContent = this.name;
+  jobData.textContent = this.job;
+  ageData.textContent = this.age;
+trElement.appendChild(nameData);
+trElement.appendChild(jobData);
+trElement.appendChild(ageData);
+peopleTable.appendChild(trElement);
+}
