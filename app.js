@@ -45,9 +45,9 @@ pikePlace.render = function() {
 
 
 //Adding the total to the end of the list//
-  var listElement1 = document.createElement('li');
-  listElement1.textContent = 'Total: ' + this.total + ' cookies';
-  pikePlaceList.appendChild(listElement1);
+  var pikeSalesTotal = document.createElement('li');
+  pikeSalesTotal.textContent = 'Total: ' + this.total + ' cookies';
+  pikePlaceList.appendChild(pikeSalesTotal);
 };
 
 pikePlace.render();
