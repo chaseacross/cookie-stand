@@ -33,7 +33,7 @@ pikePlace.cookiesPerCustomer = function() {
   }
 },
 
-// Showing results in table on Index -- just trying to get results to display, no luck so far//
+// Render working, but need to add total//
 pikePlace.render = function() {
   var pikePlaceList = document.getElementById('pikePlaceList');
   this.cookiesPerCustomer();
@@ -42,6 +42,12 @@ pikePlace.render = function() {
     pikePlaceSales.textContent = hours[i] + this.cookiesPerHour[i] + ' cookies';
     pikePlaceList.appendChild(pikePlaceSales);
   }
+
+
+//Adding the total to the end of the list//
+  var listElement1 = document.createElement('li');
+  listElement1.textContent = 'Total: ' + this.total + ' cookies';
+  pikePlaceList.appendChild(listElement1);
 };
 
 pikePlace.render();
