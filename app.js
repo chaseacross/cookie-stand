@@ -30,6 +30,12 @@ CookieStore.cookiesPerCustomer = function() {
     this.total += singleHourCookies;
   }
 };
+//Need to actually create stores to test table, to wit://
+new Store('Pike Place', 17, 88, 5.2);
+new Store('SeaTac Airport', 6, 24, 1.2);
+new Store('Southcenter', 11, 38, 1.9);
+new Store('Bellevue Square', 20, 48, 3.3);
+new Store('Alki', 3, 24, 2.6);
 
 //Generating table and populating with data//
 this.renderAsRow = function(){
