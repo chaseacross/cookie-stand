@@ -1,83 +1,147 @@
-//Establishing top-level variables//
-
+//Hours universal variables for all locations -- top level//
 var hours = ['10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+//Added store function to accommodate new store addition functionality//
 var stores = [];
 var table;
 
-//Basic cookie store constructor function with all elements of a cookie store//
-
-function CookieStore(store, min, ma, avgCustomer) {
-  this.store = store;
+//Recreated all elements from one store per example from lecture//
+function Store(name, min, max, avg) {
+  //Note capitalized constructor name//
+  this.name = name;
   this.min = min;
-  this.ma = ma;
-  this.avgCustomer = avgCustomer;
-  this.perHourTotals = [];
-  this.grandTotal = 0;
+  this.max = max;
+  this.avg = avg;
+  this.cookiesPerHour = [];
+  this.total = 0;
   stores.push(this);
-
-//This code was referred to me by partner -- neither of us is 100% sure how/why it is necessary//
-  this.hourTotal();
+  this.hours();
   renderStore(table, this) ;
 }
-//Customer generator -- random number between min and max//
-CookieStore.prototype.getRandom = function(min, max) {
+
+//Originally didn't have prototype reference -- instructor suggested it be added
+//during code review on Wed, but still not 100% sure why beyond it will be necessary
+//later when functions become more complex//
+
+//Creating first element -- random number of custies in an hour for one store//
+Store.prototype.custiesPerHour = function(min, max) {
   return Math.random() * (max - min) + min;
 };
 
-//Uses random customer number and applies a random number of cookies purchased by customer based on the average number of cookies from store data//
-CookieStore.prototype.hourTotal = function() {
+////Creating per store cookie totals by multiplying custies by avg purchase for each hour//
+Store.prototype.hours = function() {
   for (var i = 0; i < hours.length; i++) {
-    var averageCookiesPerCusty = Math.floor(this.avgCustomer * this.getRandom(this.min, this.ma));
-    this.perHourTotals.push(averageCookiesPerCusty);
-    this.grandTotal += averageCookiesPerCusty;
+    var randomNum = Math.floor(this.avg * this.custiesPerHour(this.min, this.max));
+    this.cookiesPerHour.push(randomNum);
+    this.total += randomNum;
   }
 };
 
-//This function renders the final table -- neither me nor partner sure why it is in parantheses//
+//Creating table -- this part left me and my driver/nav partner struggling because we still aren't 100% sure
+//why this function is contained in parantheses, but online sources said it had to be and it worked//
+
+//This section renders the table elements that will then be populated by data as stores
+//are rendered//
 (function renderTable() {
   table = document.createElement('table');
   table.id = 'table';
-  var nameCell = document.createElement('tr');
-  var store = document.createElement('th');
-  store.textContent = '';
-  nameCell.appendChild(store);
+  var storeNameCell = document.createElement('tr');
+  var name = document.createElement('th');
+  name.textContent = '';
+  storeNameCell.appendChild(name);
+  //Note the for loop using the still universal hours function -- Not
+  //sure how this would work if all stores had radically different hours//
   for (var i = 0; i < hours.length; i++) {
-    var cookiesPerHour = document.createElement('th');
-    cookiesPerHour.textContent = hours[i];
-    nameCell.appendChild(cookiesPerHour);
+    var cookiesPerHourEl = document.createElement('th');
+    cookiesPerHourEl.textContent = hours[i];
+    storeNameCell.appendChild(cookiesPerHourEl);
   }
   var showsTotal = document.createElement('th');
-//Appends the word "totals" to proper column of table//
   showsTotal.textContent = 'Totals';
-  nameCell.appendChild(showsTotal);
-  table.appendChild(nameCell);
-  //Places table in html//
+  storeNameCell.appendChild(showsTotal);
+  table.appendChild(storeNameCell);
   document.getElementById('store_data').appendChild(table);
 })();
-
-//Constructor for store table data -- note appending within store constructor function//
+//Previous code generated table in instruct -- this populates it with the actual
+//data and drops it in based on element names//
 function renderStore(table, store) {
     var placeStoreHere = document.createElement('tr');
     var showStoreName = document.createElement('th');
-    showStoreName.textContent = store.store;
+    showStoreName.textContent = store.name;
     placeStoreHere.id = store.id;
     placeStoreHere.appendChild(showStoreName);
-//Loops function for creation of hourly sales totals//
+    //Again, the for loop based on hours, mirroring the table generation function
+    //but this time passing data into those newly constructed cells//
     for (var i = 0; i < hours.length; i++) {
-      var totalPerHourCell = document.createElement('td');
-      totalPerHourCell.textContent = store.perHourTotals[i];
-      placeStoreHere.appendChild(totalPerHourCell);
+      var showTotalThisHour = document.createElement('td');
+      showTotalThisHour.textContent = store.cookiesPerHour[i];
+      placeStoreHere.appendChild(showTotalThisHour);
     }
-
     var showGrandTotal = document.createElement('td');
-    showGrandTotal.textContent = store.grandTotal;
+    showGrandTotal.textContent = store.total;
     placeStoreHere.appendChild(showGrandTotal);
     table.appendChild(placeStoreHere);
 };
 
-//Calls new stores with data and enters them into the constructor//
-var pikePlace = new CookieStore('Pike Place', 17, 88, 5.2);
-var seaTac = new CookieStore('SeaTac Airport', 6, 44, 1.2);
-var southCenter = new CookieStore('Southcenter Mall', 11, 38, 1.9);
-var bellevue = new CookieStore('Bellevue Square', 20, 48, 3.3);
-var alki = new CookieStore('Alki', 3, 24, 2.6);
+//All store names//
+var pikePlace = new Store('Pike Place', 17, 88, 5.2);
+var seaTac = new Store('SeaTac Airport', 6, 44, 1.2);
+var southCenter = new Store('Southcenter Mall', 11, 38, 1.9);
+var bellevue = new Store('Bellevue Square', 20, 48, 3.3);
+var alki = new Store('Alki', 3, 24, 2.6);
+
+//New store functionality//
+
+//Creating new store from user input, but adding the previously generated table//
+function renderNewStore(newName, newMinimum, newMaximum, newAverage) {
+  tbl = document.getElementById('table');
+  var newStore = new Store(newName, newMinimum, newMaximum, newAverage);
+}
+
+//Updating function to include the new store data//
+function update(newStore, min, max, avg) {
+  var addsNewStore = document.getElementById(newStore.newName.replace(' ', ''));
+
+//New store data fields -- exact mirror of other stores//
+  newStore.min = min;
+  newStore.max = max;
+  newStore.avg = avg;
+  newStore.cookiesPerHour = [];
+  newStore.total = 0;
+  newStore.hours();
+
+  //Same for loop as before except using node functionality to open the possibility
+  //of reusing this code over and over to generate unlimited stores//
+  for (var i = 0; i < newStore.cookiesPerHour.length; i++) {
+    addsNewStore.childNodes[i + 1].textContent = newStore.cookiesPerHour[i];
+  }
+  addsNewStore.childNodes[addsNewStore.childNodes.length-1].textContent = newStore.total;
+}
+
+//Event listener -- I actually toyed with this type of element in my first website//
+//The use of event listeners and leveraging getElementByID is the preferred way to generate
+//the button functionality I added for my guessing game, but it was too complex
+//for me at the time//
+document.getElementById('add-store').addEventListener('submit', function(event) {
+  event.preventDefault();
+  var exists = false;
+  var store = event.target.store.value;
+  var min = parseInt(event.target.min.value);
+  var max = parseInt(event.target.max.value);
+  var avg = parseInt(event.target.avg.value);
+  //ParseInt prevents data that would break the function from being passed into those fields//
+  for (var i = 0; i < stores.length; i++) {
+    if (stores[i].id === store.replace(' ', '')) {
+      exists = true;
+      break;
+    }
+  }
+  if (exists === true) {
+    update(stores[i], min, max, avg);
+  } else {
+    renderNewStore(store, min, max, avg);
+  }
+  event.target.store.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.avg.value = null;
+});

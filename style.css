@@ -92,6 +92,12 @@ li {
   margin-right: 1em;
 }
 
+#bodyIndex {
+    background-image: url(Assets\fishies.jpg);
+    opacity: 0.5;
+}
+
+
 #company-name li {
   color: #167500;
   margin-top: -3%;
