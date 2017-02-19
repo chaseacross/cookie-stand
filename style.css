@@ -94,6 +94,7 @@ li {
 
 #company-name li {
   color: #167500;
+  margin-top: -3%;
   font-weight: bold;
   font-size: 37px;
 }
