@@ -10,6 +10,13 @@ a:hover {
     color: #4D8963;
 }
 
+h3 {
+  font-family: 'Courier', serif;
+  font-size: 18px;
+  color: white;
+  background-color: #4f4f4f;
+}
+
 body {
   display: flex;
   flex-direction: column;
