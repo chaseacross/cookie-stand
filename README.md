@@ -10,3 +10,8 @@ Cookie Stand Goals for 2/11
 -Main page meets requirements of problem domain
 -Stores are correctly rendering as lists to the main page
 -Public facing page partly constructed
+
+Cookie Stand Goals for 2/18
+-Fully fleshed out Index and Sales page
+-Ability to add new cookie stand to sales table
+-Cookie table sales page fully functioning
