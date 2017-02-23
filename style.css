@@ -50,6 +50,7 @@ header {
   font-family: 'Crete Round', serif;
     font-size: 25px;
     color: white;
+  z-index: 1;
 }
 
 main {
@@ -141,10 +142,11 @@ li {
   flex-direction: column;
   position: fixed;
   left: 0;
-  top: 10%;
+  top: 0;
   bottom: 0;
   background-color: #bf4040;
   list-style: none;
   align-items: center;
   justify-content: space-between;
+  z-index: -1
 }
