@@ -91,7 +91,7 @@ var alki = new Store('Alki', 3, 24, 2.6);
 
 //New store functionality//
 
-//Creating new store from user input, but adding the previously generated table//
+//Creating new store from user input, but adding to the previously generated table//
 function renderNewStore(newName, newMinimum, newMaximum, newAverage) {
   tbl = document.getElementById('table');
   var newStore = new Store(newName, newMinimum, newMaximum, newAverage);
@@ -129,7 +129,7 @@ document.getElementById('add-store').addEventListener('submit', function(event) 
   var max = parseInt(event.target.max.value);
   var avg = parseInt(event.target.avg.value);
   //ParseInt prevents data that would break the function from being passed into those fields//
-  for (var i = 0; i < stores.length; i++) {
+  for (var i = 0; i > stores.length; i++) {
     if (stores[i].id === store.replace(' ', '')) {
       exists = true;
       break;
@@ -137,7 +137,12 @@ document.getElementById('add-store').addEventListener('submit', function(event) 
   }
   if (exists === true) {
     update(stores[i], min, max, avg);
-  } else {
+  }
+  // This code prevents NaN values from passing onto the table if forms are left blank
+  else if (event.target.max.value <= 0) {
+    update(stores[i], min, max, avg);
+  }
+  else {
     renderNewStore(store, min, max, avg);
   }
   event.target.store.value = null;

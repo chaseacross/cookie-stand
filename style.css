@@ -14,7 +14,9 @@ h3 {
   font-family: 'Courier', serif;
   font-size: 18px;
   color: white;
+  display: flex;
   background-color: #4f4f4f;
+  padding-right: 30em;
 }
 
 body {
@@ -27,13 +29,14 @@ body {
   background-size: cover;
 }
 
-div#first{
+div#first {
 background-image: url('fishies.jpg');
 opacity:0.2;
 width:300px;
 height:300px;
 }
-div#second{
+
+div#second {
 width:300px;
 height:300px;
 position:absolute;
@@ -50,7 +53,7 @@ header {
   font-family: 'Crete Round', serif;
     font-size: 25px;
     color: white;
-  z-index: 1;
+  z-index: 1
 }
 
 main {
@@ -101,6 +104,12 @@ li {
   list-style: none;
 }
 
+table { table-layout: fixed;
+        margin-left: 2em;
+        margin-right: 2em
+        width: 1px;
+}
+
 .share-icon {
   width: 2em;
   padding: .5em 0;
@@ -120,6 +129,12 @@ li {
   margin-top: -3%;
   font-weight: bold;
   font-size: 37px;
+}
+
+#store_data {
+  display: flex;
+  padding: 2em;
+  align-content: center;
 }
 
 #header-style {
@@ -142,7 +157,7 @@ li {
   flex-direction: column;
   position: fixed;
   left: 0;
-  top: 0;
+  top: 10%;
   bottom: 0;
   background-color: #bf4040;
   list-style: none;
